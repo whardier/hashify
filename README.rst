@@ -45,6 +45,18 @@ iterating through each link file and removing any links that have a hard link
 reference count (st_ino) of 1.  1 means they are isolated and the file in the 
 source directory was most likely deleted.
 
+Erm...
+------
+
+Can't I just hard link like files together?
+
+Yes but that would effectively link unrelated files together.  If I touched a 
+file (0 bytes) and think linked that to all of the 0 length files within my 
+source data set (of which there will most likely be many) then if I were to add 
+content to that file, all other files would reflect that change.  Similarly, if 
+a backup file were the same as a present file and the present file were changed, 
+the backup file would share the link and therefore not be a backup at all.
+
 Usage
 -----
 
